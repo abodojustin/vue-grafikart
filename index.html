@@ -20,14 +20,8 @@
         <div class="header item">Tutoriel</div>
     </div>
     <!-- container Vue Js -->
-    <div class="ui main container" id="app">
-        <p @click="demo2">
-            <a href="http://lefax.cm" @click.prevent.stop="demo">Démonstration</a>
-        </p>
-        <!-- <input type="text" v-model.lazy="message"> -->
-        <input type="text" v-salut.a.b.c="message">
-        <input type="text" v-model="message">
-        ==={{ message }}===
+    <div id="app">
+        {{ message | capitalize }}
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.0-rc.5/vue.js"></script>
