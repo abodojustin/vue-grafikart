@@ -1,14 +1,14 @@
-new Vue({
+let vm = new Vue({
   el: "#app",
   data: {
-    message: "salut les gens",
-    link: "www.lefax.cm",
-    cls: "success",
-    persons: ["Francis", "Justin", "Nathalie", "Jean", "Marine", "Marion"],
+    seconds: 0,
   },
-  methods: {
-    close: function () {
-      this.success = false;
-    },
+  mounted: function () {
+    this.$interval = setInterval(() => {
+      this.seconds++;
+    }, 1000);
+  },
+  destroyed: function () {
+    clearInterval(this.$interval);
   },
 });
