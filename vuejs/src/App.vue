@@ -4,18 +4,21 @@
     <HelloWorld msg="Welcome to Your Vue.js App" />
 
     <Counter></Counter>
+    <Alert></Alert>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import Counter from "./Counter.vue";
+import Alert from "./Alert.vue";
 
 export default {
   name: "App",
   components: {
     HelloWorld,
     Counter,
+    Alert,
   },
 };
 </script>
