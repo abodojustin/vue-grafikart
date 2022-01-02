@@ -21,22 +21,8 @@
     </div>
     <!-- container Vue Js -->
     <div class="ui main container" id="app">
-        <form-user v-model="user">
-            <div slot="header">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur voluptate voluptatibus provident, sint accusamus facere sapiente vero ea odit nulla quod? Corrupti odit culpa officia excepturi asperiores similique a ipsam.
-            </div>
-            <div slot="footer">
-                Ipsum dolor sit amet consectetur adipisicing elit. Consequuntur voluptate voluptatibus provident, sint accusamus facere sapiente vero ea odit nulla quod? Corrupti odit culpa officia excepturi asperiores similique a ipsam.
-            </div>
-        </form-user>
-        <pre>
-            {{ user }}
-        </pre>
-        <p>&nbsp;</p>
-        <message type="success" :message="message" header="Attention" v-if="alert" @close="hideAlert"></message>
-        <button @click="showAlert" v-if="!alert">Alerter</button>
         <counter></counter>
-        <counter :start="3"></counter>
+        <notifications></notifications>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.0-rc.5/vue.js"></script>

@@ -1,96 +1,58 @@
-let message = {
-  props: {
-    type: { type: String, default: "success" },
-    message: String,
-    header: String,
-  },
-  template: `<div class="ui message" :class="type">
-        <i class="close icon" @click.prevent="close"></i>
-        <div class="header">{{ header }}</div>
-        {{ message }}
-    </div>`,
-  methods: {
-    close() {
-      this.$emit("close");
-    },
-  },
-};
-
-let counter = {
-  data: function () {
-    return {
+class NotificationsStore {
+  constructor() {
+    this.state = {
       count: 0,
     };
-  },
-  props: {
-    start: { type: Number, default: 0 },
-  },
-  methods: {
-    increment: function () {
-      this.count++;
-    },
-  },
-  template: `<button @click="increment">{{ count }}</button>`,
-  mounted: function () {
-    this.count = this.start;
-  },
-};
+  }
 
-let formUser = {
-  props: {
-    value: Object,
-  },
+  increment() {
+    this.state.count++;
+  }
+
+  decrement() {
+    this.state.count--;
+  }
+}
+
+let notifications_store = new NotificationsStore();
+
+let Counter = {
   data() {
     return {
-      user: JSON.parse(JSON.stringify(this.value)),
+      state: notifications_store.state,
     };
   },
+  computed: {
+    count() {
+      return this.state.count;
+    },
+  },
   methods: {
-    save() {
-      this.$emit("input", this.user);
+    increment() {
+      notifications_store.increment();
     },
   },
   template: `
-        <form class="ui form" @submit.prevent="save">
-        <p>
-                <slot name="header"></slot>
-            </p>
-            <div class="field">
-                <label for="">Prénom</label>
-                <input type="text" v-model="user.firstname" />
-            </div>
-            <div class="field">
-                <label for="">Nom</label>
-                <input type="text" v-model="user.lastname" />
-            </div>
-            <button class="ui button" type="submit">Envoyer</button>
-            <p>
-                <slot name="footer"></slot>
-            </p>
-        </form>
+    <button @click="increment">{{ count }}</button>
     `,
-  mounted: function () {
-    console.log(this);
-  },
 };
 
-let vm = new Vue({
-  el: "#app",
-  components: { message, counter, formUser },
-  data: {
-    message: "Salut les gens",
-    alert: false,
-    user: {
-      firstname: "Jean",
-      lastname: "DeLaTour",
-    },
-  },
+let Notifications = {
+  components: { Counter },
   methods: {
-    showAlert() {
-      this.alert = true;
-    },
-    hideAlert() {
-      this.alert = false;
+    addNotification() {
+      notifications_store.increment();
     },
   },
+  template: `
+        <div>
+            <counter></counter>
+            <button @click="addNotification">Incrémenter</button>
+        </div>
+    `,
+};
+
+new Vue({
+  el: "#app",
+  components: { Notifications, Counter },
 });
